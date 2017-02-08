@@ -1,13 +1,20 @@
 {{include './header'}}
-<div>
-    <ul class="list">
-        {{each articles}}
+<div class="container">
+    <header class="head">
+        <div class="brand">
+            <span>LeoDots</span>
+        </div>
+    </header>
+    <div>
+        <ul class="list">
+            {{each articles}}
             <li>
                 <a href="/archives/{{$value.name}}">
                     {{$value.title}}
                 </a>
             </li>
-        {{/each}}
-    </ul>
+            {{/each}}
+        </ul>
+    </div>
 </div>
 {{include './footer'}}
