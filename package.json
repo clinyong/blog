@@ -11,5 +11,8 @@
   "license": "ISC",
   "devDependencies": {
     "eslint": "^3.15.0"
+  },
+  "dependencies": {
+    "art-template": "^3.1.3"
   }
 }
