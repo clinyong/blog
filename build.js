@@ -3,6 +3,10 @@ const fs = require("fs");
 const path = require("path");
 const showdown = require("showdown"),
     converter = new showdown.Converter();
+const postcss = require("postcss");
+const precss = require("precss");
+const autoprefixer = require("autoprefixer");
+const cssnano = require("cssnano");
 
 template.config("base", path.resolve("./src/templates/"));
 template.config("extname", ".html");
@@ -52,7 +56,8 @@ function processArticles() {
         const html = template("article", {
             title,
             date,
-            content
+            content,
+            cssName: "article"
         });
         const distName = fileName.replace(".md", ".html");
         fs.writeFileSync(
@@ -60,14 +65,45 @@ function processArticles() {
             html,
             "utf8"
         );
-        articles.push({title, date, name: distName});
+        articles.push({
+            title,
+            date,
+            name: distName
+        });
     });
 
-    return articles.sort((a, b) => a.date > b.date ? -1 : 1);
+    const indexContent = template("index", {
+        articles: articles.sort((a, b) => a.date > b.date ? -1 : 1),
+        cssName: "index"
+    });
+    fs.writeFileSync(`${dist}/index.html`, indexContent, "utf8");
 }
 
-const articles = processArticles();
-const indexContent = template("index", {
-    articles
-});
-fs.writeFileSync(`${dist}/index.html`, indexContent, "utf8");
+function processCSS() {
+    const srcPath = "./src/scss";
+    const distPath = "./dist/css";
+
+    const files = fs.readdirSync(srcPath);
+    files.forEach(fileName => {
+        const text = fs.readFileSync(
+            `${srcPath}/${fileName}`,
+            "utf8"
+        );
+        const distName = `${distPath}/${fileName.replace(".scss", ".css")}`;
+        postcss([precss, autoprefixer, cssnano()])
+            .process(text, {
+                from: `${srcPath}/${fileName}`,
+                to: distName
+            }).then(result => {
+                fs.writeFileSync(distName, result.css);
+                if (result.map) {
+                    fs.writeFileSync(`${distPath}/${fileName}.map`,
+                        result.map);
+                }
+            });
+
+    });
+}
+
+processCSS();
+processArticles();
