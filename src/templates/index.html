@@ -1,23 +1,13 @@
 {{include './header'}}
-<div class="container">
-    <header class="head">
-        <div class="brand">
-            <span>LeoDots</span>
-        </div>
-    </header>
-    <div>
-        <ul class="list">
+<div>
+    <ul class="list">
+        {{each articles}}
             <li>
-                <a href="/archives/2.html">
-                        VSCode CSS Modules
-                    </a>
-            </li>
-            <li>
-                <a href="/archives/1.html">
-                        Hello World!
+                <a href="/archives/{{$value.name}}">
+                    {{$value.title}}
                 </a>
             </li>
-        </ul>
-    </div>
+        {{/each}}
+    </ul>
 </div>
 {{include './footer'}}
