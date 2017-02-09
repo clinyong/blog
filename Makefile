@@ -6,3 +6,6 @@ init:
 
 build:
 	node build.js
+
+watch:
+	@node server.js

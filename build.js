@@ -113,5 +113,10 @@ function processCSS() {
     });
 }
 
-processCSS();
-processArticles();
+function start() {
+    processCSS();
+    processArticles();
+}
+start();
+
+module.exports = start;

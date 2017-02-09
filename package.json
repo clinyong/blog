@@ -17,6 +17,7 @@
     "autoprefixer": "^6.7.2",
     "cssnano": "^3.10.0",
     "del": "^2.2.2",
+    "express": "^4.14.1",
     "postcss": "^5.2.12",
     "precss": "^1.4.0",
     "sha1": "^1.1.1",
