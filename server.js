@@ -1,6 +1,7 @@
 const express = require("express");
 const fs = require("fs");
 const build = require("./build");
+const chalk = require("chalk");
 
 const app = express();
 
@@ -9,6 +10,9 @@ fs.watch("./src", {recursive: true}, () => {
 });
 
 app.use(express.static("./dist"));
-app.listen(8080, () => {
-    console.log("The server is Listening on 8080");
+
+const port = 8080;
+app.listen(port, () => {
+    console.log(chalk.yellow("Starting up successfully. Available on:"));
+    console.log(chalk.green(`\n    http://127.0.0.1:${8080}`));
 });
