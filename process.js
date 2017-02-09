@@ -13,6 +13,7 @@ const del = require("del");
 template.config("base", path.resolve("./src/templates/"));
 template.config("extname", ".html");
 template.config("compress", true);
+template.config("cache", false);
 
 const dist = "./dist";
 
