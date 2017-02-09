@@ -1,12 +1,12 @@
 const express = require("express");
 const fs = require("fs");
-const build = require("./build");
+const process = require("./process");
 const chalk = require("chalk");
 
 const app = express();
 
 fs.watch("./src", {recursive: true}, () => {
-    build();
+    process();
 });
 
 app.use(express.static("./dist"));
