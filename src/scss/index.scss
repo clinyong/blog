@@ -8,15 +8,25 @@ a:active {
 }
 
 .container {
-    width: 768px;
-    margin: 0 auto;
+    width: 100%;
+    @media screen and (min-width: 770px) {
+        width: 768px;
+        margin: 0 auto;
+    }
 }
 
 .head {
-    margin-top: 50px;
+    height: 150px;
+    line-height: 150px;
     position: relative;
-    height: 30px;
-    line-height: 30px;
+}
+
+@media screen and (min-width: 770px) {
+    .head {
+        margin-top: 50px;
+        height: 30px;
+        line-height: 30px;
+    }
 }
 
 .brand {
@@ -24,9 +34,16 @@ a:active {
     &>span {
         color: #fff;
         padding: 10px;
-        border-radius: 5px;
-        font-size: 24px;
         background-color: #464d5c;
+        font-size: 40px;
+        display: block;
+    }
+    @media screen and (min-width: 770px) {
+        &>span {
+            border-radius: 5px;
+            font-size: 24px;
+            display: inline;
+        }
     }
 }
 
@@ -44,19 +61,30 @@ a:active {
 
 .list {
     padding: 0;
-    font-size: 20px;
+    margin: 0;
+    margin-top: 20px;
+    font-size: 16px;
     list-style-type: none;
-    box-shadow: 0px 0px 15px #cecece;
-    margin-top: 50px;
     background-color: #fff;
-    &>li:hover {
-        cursor: pointer;
-        background-color: #eee;
-    }
     &>li>a {
         display: block;
         border-bottom: 1px solid #ddd;
-        padding: 10px 20px;
-        font-size: 16px;
+        padding: 30px 20px;
+    }
+}
+
+@media screen and (min-width: 770px) {
+    .list {
+        margin-top: 50px;
+        box-shadow: 0px 30px 60px 0px #d3dde2;
+        &>li:hover {
+            cursor: pointer;
+            background-color: #eee;
+        }
+        &>li>a {
+            display: block;
+            border-bottom: 1px solid #ddd;
+            padding: 20px;
+        }
     }
 }
