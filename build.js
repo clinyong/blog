@@ -50,4 +50,4 @@ function cleanDist() {
     return del(["./dist/**/*.html"]);
 }
 
-cleanDist().then(process).then(createSitemap);
+cleanDist().then(() => process(true)).then(createSitemap);

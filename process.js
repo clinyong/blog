@@ -42,7 +42,7 @@ function extractMetaData(text) {
     };
 }
 
-function processArticles() {
+function processArticles(isProduction) {
     const articlePath = "./src/articles";
     const files = fs.readdirSync(articlePath);
     const articles = [];
@@ -62,7 +62,8 @@ function processArticles() {
             title,
             date,
             content,
-            inlineCSS: inlineCSS["article"]
+            inlineCSS: inlineCSS["article"],
+            isProduction
         });
         const distName = fileName.replace(".md", ".html");
         fs.writeFileSync(
@@ -79,7 +80,8 @@ function processArticles() {
 
     const indexContent = template("index", {
         articles: articles.sort((a, b) => a.date > b.date ? -1 : 1),
-        inlineCSS: inlineCSS["index"]
+        inlineCSS: inlineCSS["index"],
+        isProduction
     });
     fs.writeFileSync(`${dist}/index.html`, indexContent, "utf8");
 }
@@ -116,4 +118,8 @@ function processCSS() {
     });
 }
 
-module.exports = () => Promise.all(processCSS()).then(processArticles);
+module.exports = (isProduction = false) => {
+    return Promise
+        .all(processCSS())
+        .then(() => processArticles(isProduction));
+};
