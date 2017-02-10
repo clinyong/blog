@@ -1,12 +1,13 @@
 {{include './header'}}
 <div class="container">
     <header class="head">
-        <div class="brand">
-            <span>&lt;Leodots &sol;&gt;</span>
+        <div class="brandMobile">
+            <span class="tag">&lt;</span><span>Leodots </span><span class="tag">&sol;</span><span class="tag">&gt;</span>
         </div>
     </header>
     <div>
         <ul class="list">
+            <li class="brandPC"><span class="shell">$ </span><span class="command">ls</span></li>
             {{each articles}}
             <li>
                 <a href="/archives/{{$value.name}}">
