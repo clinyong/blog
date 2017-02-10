@@ -12,12 +12,13 @@ const del = require("del");
 
 template.config("base", path.resolve("./src/templates/"));
 template.config("extname", ".html");
+template.config("escape", false);
 template.config("compress", true);
 template.config("cache", false);
 
 const dist = "./dist";
 
-let cssFileName = {};
+let inlineCSS = {};
 
 function extractMetaData(text) {
     const lines = text.split("\n");
@@ -62,7 +63,7 @@ function processArticles() {
             title,
             date,
             content,
-            cssName: cssFileName["article"]
+            inlineCSS: inlineCSS["article"]
         });
         const distName = fileName.replace(".md", ".html");
         fs.writeFileSync(
@@ -79,7 +80,7 @@ function processArticles() {
 
     const indexContent = template("index", {
         articles: articles.sort((a, b) => a.date > b.date ? -1 : 1),
-        cssName: cssFileName["index"]
+        inlineCSS: inlineCSS["index"]
     });
     fs.writeFileSync(`${dist}/index.html`, indexContent, "utf8");
 }
@@ -91,7 +92,8 @@ function processCSS() {
     del.sync([`${distPath}/*.css`]);
 
     const files = fs.readdirSync(srcPath);
-    files.forEach(fileName => {
+
+    return files.map(fileName => {
         if (fileName === "common.scss") {
             return;
         }
@@ -101,24 +103,22 @@ function processCSS() {
             "utf8"
         );
         const md5Name = sha1(text).substr(0, 5);
-        cssFileName[[fileName.replace(".scss", "")]] = md5Name;
         const distName = `${distPath}/${md5Name}.css`;
-        postcss([precss, autoprefixer, cssnano()])
-            .process(text, {
-                from: `${srcPath}/${fileName}`,
-                to: distName
-            }).then(result => {
-                fs.writeFileSync(distName, result.css);
-                if (result.map) {
-                    fs.writeFileSync(`${distPath}/${distName}map`,
-                        result.map);
-                }
-            });
 
+        return new Promise(resolve => {
+            postcss([precss, autoprefixer, cssnano()])
+                .process(text, {
+                    from: `${srcPath}/${fileName}`,
+                    to: distName
+                }).then(result => {
+                    inlineCSS[[fileName.replace(".scss", "")]] =
+                        result.css;
+                    resolve();
+                });
+        });
     });
 }
 
 module.exports = () => {
-    processCSS();
-    processArticles();
+    Promise.all(processCSS()).then(processArticles);
 };
