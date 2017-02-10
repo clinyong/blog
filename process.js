@@ -92,6 +92,10 @@ function processCSS() {
 
     const files = fs.readdirSync(srcPath);
     files.forEach(fileName => {
+        if (fileName === "common.scss") {
+            return;
+        }
+
         const text = fs.readFileSync(
             `${srcPath}/${fileName}`,
             "utf8"
