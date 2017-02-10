@@ -8,7 +8,6 @@ const precss = require("precss");
 const autoprefixer = require("autoprefixer");
 const cssnano = require("cssnano");
 const sha1 = require("sha1");
-const del = require("del");
 
 template.config("base", path.resolve("./src/templates/"));
 template.config("extname", ".html");
@@ -89,8 +88,6 @@ function processCSS() {
     const srcPath = "./src/scss";
     const distPath = "./dist/css";
 
-    del.sync([`${distPath}/*.css`]);
-
     const files = fs.readdirSync(srcPath);
 
     return files.map(fileName => {
@@ -119,6 +116,4 @@ function processCSS() {
     });
 }
 
-module.exports = () => {
-    Promise.all(processCSS()).then(processArticles);
-};
+module.exports = () => Promise.all(processCSS()).then(processArticles);
