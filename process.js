@@ -1,41 +1,41 @@
-const template = require("art-template");
-const fs = require("fs");
-const path = require("path");
-const showdown = require("showdown"),
+const template = require('art-template');
+const fs = require('fs');
+const path = require('path');
+const showdown = require('showdown'),
     converter = new showdown.Converter();
-const postcss = require("postcss");
-const precss = require("precss");
-const autoprefixer = require("autoprefixer");
-const cssnano = require("cssnano");
-const sha1 = require("sha1");
+const postcss = require('postcss');
+const precss = require('precss');
+const autoprefixer = require('autoprefixer');
+const cssnano = require('cssnano');
+const sha1 = require('sha1');
 
-template.config("base", path.resolve("./src/templates/"));
-template.config("extname", ".html");
-template.config("escape", false);
-template.config("compress", true);
-template.config("cache", false);
+template.config('base', path.resolve('./src/templates/'));
+template.config('extname', '.html');
+template.config('escape', false);
+template.config('compress', true);
+template.config('cache', false);
 
-const dist = "./dist";
+const dist = './dist';
 
 let inlineCSS = {};
 
 function extractMetaData(text) {
-    const lines = text.split("\n");
+    const lines = text.split('\n');
 
     let i = 0;
     for (; i < lines.length; i++) {
-        if (lines[i] === "---") {
+        if (lines[i] === '---') {
             break;
         }
     }
 
     const meta = {};
     lines.slice(0, i).forEach(line => {
-        const items = line.split(":");
+        const items = line.split(':');
         meta[items[0]] = items[1].trim();
     });
 
-    const content = lines.slice(i + 1).join("\n");
+    const content = lines.slice(i + 1).join('\n');
     return {
         meta,
         content
@@ -43,14 +43,14 @@ function extractMetaData(text) {
 }
 
 function processArticles(isProduction) {
-    const articlePath = "./src/articles";
+    const articlePath = './src/articles';
     const files = fs.readdirSync(articlePath);
     const articles = [];
 
     files.forEach(fileName => {
         const text = fs.readFileSync(
             `${articlePath}/${fileName}`,
-            "utf8"
+            'utf8'
         );
         const result = extractMetaData(text);
         const {
@@ -58,18 +58,18 @@ function processArticles(isProduction) {
             date
         } = result.meta;
         const content = converter.makeHtml(result.content);
-        const html = template("article", {
+        const html = template('article', {
             title,
             date,
             content,
-            inlineCSS: inlineCSS["article"],
+            inlineCSS: inlineCSS['article'],
             isProduction
         });
-        const distName = fileName.replace(".md", ".html");
+        const distName = fileName.replace('.md', '.html');
         fs.writeFileSync(
             `${dist}/archives/${distName}`,
             html,
-            "utf8"
+            'utf8'
         );
         articles.push({
             title,
@@ -78,28 +78,28 @@ function processArticles(isProduction) {
         });
     });
 
-    const indexContent = template("index", {
+    const indexContent = template('index', {
         articles: articles.sort((a, b) => a.date > b.date ? -1 : 1),
-        inlineCSS: inlineCSS["index"],
+        inlineCSS: inlineCSS['index'],
         isProduction
     });
-    fs.writeFileSync(`${dist}/index.html`, indexContent, "utf8");
+    fs.writeFileSync(`${dist}/index.html`, indexContent, 'utf8');
 }
 
 function processCSS() {
-    const srcPath = "./src/scss";
-    const distPath = "./dist/css";
+    const srcPath = './src/scss';
+    const distPath = './dist/css';
 
     const files = fs.readdirSync(srcPath);
 
     return files.map(fileName => {
-        if (fileName === "common.scss") {
+        if (fileName === 'common.scss') {
             return;
         }
 
         const text = fs.readFileSync(
             `${srcPath}/${fileName}`,
-            "utf8"
+            'utf8'
         );
         const md5Name = sha1(text).substr(0, 5);
         const distName = `${distPath}/${md5Name}.css`;
@@ -110,7 +110,7 @@ function processCSS() {
                     from: `${srcPath}/${fileName}`,
                     to: distName
                 }).then(result => {
-                    inlineCSS[[fileName.replace(".scss", "")]] =
+                    inlineCSS[[fileName.replace('.scss', '')]] =
                         result.css;
                     resolve();
                 });
