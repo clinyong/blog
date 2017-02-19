@@ -13,3 +13,6 @@ watch:
 publish:build
 	cd dist && git add . && git commit -m 'auto update blog' && git checkout master && git push
 	git add dist && git commit -m 'update submodule'
+
+post:
+	@node ./bin/post.js ${name}
