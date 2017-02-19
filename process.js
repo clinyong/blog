@@ -43,7 +43,7 @@ function extractMetaData(text) {
 }
 
 function processArticles(isProduction) {
-    const articlePath = './src/articles';
+    const articlePath = './src/post';
     const files = fs.readdirSync(articlePath);
     const articles = [];
 
