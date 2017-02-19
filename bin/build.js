@@ -1,6 +1,6 @@
 const sm = require('sitemap');
 const fs = require('fs');
-const process = require('./process');
+const process = require('../lib/process');
 const del = require('del');
 
 function listFiles(dirPath) {

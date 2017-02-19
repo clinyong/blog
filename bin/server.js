@@ -1,6 +1,6 @@
 const express = require('express');
 const fs = require('fs');
-const process = require('./process');
+const process = require('../lib/process');
 const chalk = require('chalk');
 
 const app = express();

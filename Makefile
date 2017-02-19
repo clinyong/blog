@@ -5,10 +5,10 @@ init:
 	yarn
 
 build:
-	node build.js
+	node ./bin/build.js
 
 watch:
-	@node server.js
+	@node ./bin/server.js
 
 publish:build
 	cd dist && git add . && git commit -m 'auto update blog' && git checkout master && git push
