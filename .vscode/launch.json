@@ -9,7 +9,7 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "program": "${workspaceRoot}/build.js",
+            "program": "${workspaceRoot}/bin/build.js",
             "cwd": "${workspaceRoot}"
         }
     ]

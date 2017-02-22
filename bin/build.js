@@ -2,6 +2,9 @@ const sm = require('sitemap');
 const fs = require('fs');
 const process = require('../lib/process');
 const del = require('del');
+const path = require('path');
+
+const distPath = path.resolve(__dirname, '../dist');
 
 function listFiles(dirPath) {
     return new Promise(resolve => {
@@ -30,7 +33,7 @@ function walkDir(dirPath) {
 }
 
 function createSitemap() {
-    walkDir('./dist')
+    walkDir(distPath)
         .then(urls => urls.filter(url => url.indexOf('.html') !== -1))
         .then(urls => urls.filter(url => url.indexOf('index.html') === -1))
         .then(urls => urls.map(url => ({
@@ -41,13 +44,13 @@ function createSitemap() {
                 hostname: 'https://blog.leodots.me/',
                 urls: [{ url: '/'}, ...urlList]
             });
-            fs.writeFileSync('./dist/sitemap.xml', sitemap.toString());
+            fs.writeFileSync(`${distPath}/sitemap.xml`, sitemap.toString());
         });
 
 }
 
 function cleanDist() {
-    return del(['./dist/**/*.html']);
+    return del([`${distPath}/**/*.html`]);
 }
 
 cleanDist().then(() => process(true)).then(createSitemap);
