@@ -37,7 +37,7 @@ function createSitemap() {
         .then(urls => urls.filter(url => url.indexOf('.html') !== -1))
         .then(urls => urls.filter(url => url.indexOf('index.html') === -1))
         .then(urls => urls.map(url => ({
-            url
+            url: '/' + url.split('/').slice(-2).join('/')
         })))
         .then(urlList => {
             const sitemap = sm.createSitemap({
