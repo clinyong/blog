@@ -3,14 +3,14 @@ date: 2017.05.21
 ---
 
 ## 前言
-在用 Webpack 打包的时候，默认会把一些不经常更新的第三方库也重新打包，比如 `react`，`lodash` 这些。这种默认行为无疑会增加每次的打包时间。
 
-更好的做法应该是把第三方的代码和我们自己的代码分离开，Webpack 社区有两种方案
+在用 Webpack 打包的时候，对于一些不经常更新的第三方库，比如 `react`，`lodash`，我们希望能和自己的代码分离开，Webpack 社区有两种方案
 
 - CommonsChunkPlugin
 - DLLPlugin
 
-`CommonsChunkPlugin` 存在 [chunkhash](https://github.com/webpack/webpack/issues/1315) 的问题，所以 Webpack 的作者也[推荐](https://github.com/webpack/webpack/issues/1315#issuecomment-158677302)用 `DLLPlugin`。
+对于 `CommonsChunkPlugin`，webpack 每次打包实际还是需要去处理这些第三方库，只是打包完之后，能把第三方库和我们自己的代码分开。而
+`DLLPlugin` 则是能把第三方代码完全分离开。
 
 ## 用法
 
