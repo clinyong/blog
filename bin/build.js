@@ -37,4 +37,4 @@ function cleanDist() {
     return del([`${distPath}/**/*.html`]);
 }
 
-cleanDist().then(() => process(true)).then(createSitemap);
+cleanDist().then(() => process(true)).then(createSitemap).catch(e => console.error(e));
