@@ -7,7 +7,7 @@ init:
 	yarn
 
 build:
-	next build && next export -o dist
+	next build && next export -o dist && node ./bin/createSitemap.js
 
 dev:
 	@node ./bin/server.js
