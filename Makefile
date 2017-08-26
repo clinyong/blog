@@ -1,13 +1,15 @@
+export PATH := $(shell pwd)/node_modules/.bin:$(PATH)
+SHELL := /bin/bash
+
 init:
 	git submodule init
 	git submodule update
-	mkdir -p dist/css dist/archives
 	yarn
 
 build:
-	node ./bin/build.js
+	next build && next export -o dist
 
-watch:
+dev:
 	@node ./bin/server.js
 
 publish:build
