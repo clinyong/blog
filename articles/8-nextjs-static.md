@@ -7,7 +7,7 @@ date: 2017.08.26
 传统的静态博客生成工具大概都是这样子。平时工作中都是在用 `React`，所以也一直想着能把上面的流程都改成用 `React` 来构建。刚好前不久，`next.js` 出了 [3.0](https://zeit.co/blog/next3) 版本，其中一个主要的特性就是支持静态文件输出，特别适合拿来生成静态博客。
 当然社区里面已经有基于 `next.js` 的博客生成工具，不过还是想自己去实现一套。
 
-根据官方文档，安装需要的依赖，这里的 css 方案选择现在比较热门的 [styled-components](https://www.styled-components.com/)。`pages` 对应着每个页面文件，比如 `index.js` 就会生成 `index.html`。我们这里需要三个文件
+根据官方文档，安装需要的依赖，这里的 css 方案选择现在比较热门的 [styled-components](https://www.styled-components.com/)。`pages` 目录下对应着每个页面文件，比如 `index.js` 就会生成 `index.html`。我们这里需要三个文件
 
 - _document.js
 - index.js
