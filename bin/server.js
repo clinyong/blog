@@ -1,18 +1,37 @@
-const express = require('express');
-const fs = require('fs');
-const process = require('../lib/process');
-const chalk = require('chalk');
+const express = require("express");
+const next = require("next");
+const readArticles = require("../lib/readArticles");
 
-const app = express();
+const port = parseInt(process.env.PORT, 10) || 3000;
+const dev = process.env.NODE_ENV !== "production";
+const app = next({ dev });
 
-fs.watch('./src', {recursive: true}, () => {
-    process();
-});
+async function start() {
+	await app.prepare();
+	const server = express();
+	const files = await readArticles();
 
-app.use(express.static('./dist'));
+	// custom route for posts
+	server.get("/post/:name", (req, res) => {
+		const file = files.find(item => item.link === req.path);
+		return app.render(req, res, "/post", {
+			content: file.result
+		});
+	});
 
-const port = 8080;
-app.listen(port, () => {
-    console.log(chalk.yellow('Starting up successfully. Available on:'));
-    console.log(chalk.green(`\n    http://127.0.0.1:${8080}`));
-});
+	server.get("*", (req, res) => {
+		return app.render(req, res, "/", {
+			articles: files.map(item => ({
+				link: item.link,
+				title: item.title
+			}))
+		});
+	});
+
+	server.listen(port, err => {
+		if (err) throw err;
+		console.log(`> Ready on http://localhost:${port}`);
+	});
+}
+
+start();
