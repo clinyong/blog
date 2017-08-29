@@ -1,8 +1,8 @@
-title: 避免在 react render 中使用箭头函数和 bind
+title: 避免在 React render 中使用箭头函数和 bind
 date: 2017.08.28
 ---
 
-在平时写 react 组件的时候，我们会习惯于像下面这样去绑定事件
+在平时写 React 组件的时候，我们会习惯于像下面这样去绑定事件
 
 ```jsx
 class App extends React.Component {

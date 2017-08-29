@@ -6,9 +6,9 @@ date: 2017.08.19
 
 ![](http://ol07x5ssf.bkt.clouddn.com/Screen%20Shot%202017-08-19%20at%2017.10.07.png)
 
-图中的 `perform` 就是事务的核心方法（在这里把 Transaction 翻译为事务）。事实上，整个 react 的更新，渲染都是处在事务当中。那到底什么是事务呢？
+图中的 `perform` 就是事务的核心方法（在这里把 Transaction 翻译为事务）。事实上，整个 React 的更新，渲染都是处在事务当中。那到底什么是事务呢？
 
-在 react 的源码中有一副图形象地解释了事务
+在 React 的源码中有一副图形象地解释了事务
 
 ```js
 /**
