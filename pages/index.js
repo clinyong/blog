@@ -37,8 +37,8 @@ const List = styled.ul`
 	list-style-type: none;
 	background-color: #fff;
 	@media screen and (min-width: 770px) {
+        margin-top: 0;
 		box-shadow: 0px 30px 60px 0px #d3dde2;
-		margin-top: 40px;
 	}
 `;
 

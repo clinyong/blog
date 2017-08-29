@@ -1,6 +1,13 @@
 import * as React from "react";
 import styled from "styled-components";
 
+const Container = styled.div`position: relative;`;
+const Content = styled.div`
+	@media screen and (min-width: 770px) {
+		padding: 40px 0 100px;
+	}
+`;
+
 const Footer = styled.div`
 	position: absolute;
 	bottom: 20px;
@@ -27,7 +34,8 @@ export default class Layout extends React.PureComponent {
 					i[r] ||
 					function() {
 						(i[r].q = i[r].q || []).push(arguments);
-					}), (i[r].l = 1 * new Date());
+					}),
+					(i[r].l = 1 * new Date());
 				(a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
 				a.async = 1;
 				a.src = g;
@@ -50,15 +58,15 @@ export default class Layout extends React.PureComponent {
 
 	render() {
 		return (
-			<div>
-				{this.props.children}
+			<Container>
+				<Content>{this.props.children}</Content>
 				<Footer>
 					<Coding>
 						Hosted by{" "}
 						<a href="https://pages.coding.me">Coding Pages</a>
 					</Coding>
 				</Footer>
-			</div>
+			</Container>
 		);
 	}
 }

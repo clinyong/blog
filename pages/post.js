@@ -50,8 +50,8 @@ const Container = styled.div`
 	box-sizing: border-box;
 	background-color: #fff;
 	@media screen and (min-width: 770px) {
-		width: 768px;
-		margin: 30px auto 100px;
+        width: 768px;
+        margin: 0 auto;
 		padding-left: 40px;
 		padding-right: 40px;
 	}
