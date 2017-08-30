@@ -38,13 +38,17 @@ export default class MyDocument extends Document {
 						href="/static/favicon.ico"
 						type="image/x-icon"
 					/>
+					<link
+						rel="stylesheet"
+						href="/static/highlightjs/github-gist.css"
+					/>
 					{styleTags}
 				</Head>
 				<body>
-					<div>
-						{main}
-					</div>
+					<div>{main}</div>
 					<NextScript />
+					<script src="/static/highlightjs/highlight.pack.js" />
+					<script>hljs.initHighlightingOnLoad();</script>
 				</body>
 			</html>
 		);
