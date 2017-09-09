@@ -1,8 +1,14 @@
 title: 阅读 React 源码之 Virtual DOM
-date: 2017.08.29
+date: 2017.09.09
 ---
 
-这是我阅读 React 源码系列笔记，这篇主要讲下 React 最为基础的部分，Virtual DOM。先来看下一段代码
+这是我阅读 React 源码系列笔记，这篇主要讲下 React 最为基础的部分，Virtual DOM。那具体什么是 Virtual DOM 呢，谷歌搜了一圈也没找到官方的定义，这里只能通过自己的理解来给个定义
+
+> Virtual DOM 是一个用来表示 DOM 元素的 JavaScript 对象
+
+这篇文章也是围绕这个定义，说下 React 这个转换的过程，以及这个对象具体是什么样。
+
+我们先来看下一段代码
 
 ```jsx
 import { Component } from "react";
@@ -41,7 +47,20 @@ class Test extends Component {
 ```
 
 可以在 [REPL](https://babeljs.io/repl/#?babili=false&browsers=&build=&builtIns=false&circleciRepo=&code_lz=JYWwDg9gTgLgBAbzgYQuCA7Aph-BfOAMyjTgCIosBDAYxjIG4AoJmgGyoGdO4AVLTvCwAPGDgAmPVOmy5ETOIriUM4rFAAUASnlK9yrDACuUDHA0L9VgDzjgANwB8lq67hjBLt3GsB6O05eelrMenhMeEA&debug=false&evaluate=true&lineWrap=false&presets=react&prettier=false&showSidebar=true&targets=&version=6.26.0) 看到上面的代码输出。
-从上面也可以看到，jsx 语法被转换成了调用 `React.createElement` 这个函数，所以才会提示 `React` 没有定义。关于更多 jsx 的介绍，可以看下 preact 作者写的一篇文章，[WTF is JSX](https://jasonformat.com/wtf-is-jsx/)。
+从上面也可以看到，jsx 语法被转换成了调用 `React.createElement` 这个函数，所以才会提示 `React` 没有定义。
+
+如果是 `Test` 这个组件被引用，转换出来是怎样的呢？
+
+```js
+class Hello extends Component {
+    render() {
+        const list = [1, 2];
+        return React.createElement(Test, null);
+    }
+}
+```
+
+可以看到，这里传入 `createElement` 的是 `Test` 这个类，而不是字符串。babel 在做转换的时候，如果首字母是大写，则认为是一个 React 组件，否则，则是普通的 html 元素。关于更多 jsx 的介绍，可以看下 preact 作者写的一篇文章，[WTF is JSX](https://jasonformat.com/wtf-is-jsx/)。
 
 经过上面的铺垫之后，我们可以具体来看下 `createElement` 这个函数，在 [src/isomorphic/classic/element/ReactElementValidator.js](https://github.com/facebook/react/blob/v15.4.2/src/isomorphic/classic/element/ReactElementValidator.js) 当中
 
@@ -247,3 +266,79 @@ ReactElement.createElement = function(type, config, children) {
   );
 };
 ```
+
+`config` 就是传给组件或者 html 元素的属性，比如 `ref`，`key`，`className`，或者是自定义在组件上面的属性。如果传入的 `config` 不为空的话，会先检测 `ref` 和 `key` 是不是合法的，这里还能看到，我们传入的 `key` 都会被转换成字符串类型。接着遍历传入的 `config`，过滤掉保留的属性 `RESERVED_PROPS`，保存到 `props` 对象里面。
+
+然后处理传进来的子元素和 `defaultProps`，调用 `ReactElement` 方法。
+
+```js
+var ReactElement = function(type, key, ref, self, source, owner, props) {
+  var element = {
+    // This tag allow us to uniquely identify this as a React Element
+    $$typeof: REACT_ELEMENT_TYPE,
+
+    // Built-in properties that belong on the element
+    type: type,
+    key: key,
+    ref: ref,
+    props: props,
+
+    // Record the component responsible for creating this element.
+    _owner: owner,
+  };
+
+  if (__DEV__) {
+      // ...
+  }
+
+  return element;
+}
+```
+
+这是一个简单的工厂方法，根据传进来的参数，创建一个新的 React。到这里，整个 Virtual DOM 转换的过程就算完成了。
+
+所以，假设我们有下面的 DOM 元素
+
+```html
+<ul>
+    <li>1</li>
+    <li>2</li>
+</ul>
+```
+
+转换为 React 的 Virtual DOM 之后，就变成
+
+```js
+{
+    $$typeof: REACT_ELEMENT_TYPE,
+    type: "ul",
+    ref: null,
+    key: null,
+    props: {
+        children: [{
+            $$typeof: REACT_ELEMENT_TYPE,
+            type: "li",
+            ref: null,
+            key: null,
+            props: {
+                children: "1"
+            },
+            __owner: xxx,
+        }, {
+            $$typeof: REACT_ELEMENT_TYPE,
+            type: "li",
+            ref: null,
+            key: null,
+            props: {
+                children: "2"
+            },
+            __owner: xxx,
+        }]
+    },
+    __owner: xxx,
+}
+```
+
+如果是自定义的 React 组件，比如 `<Hello />`，转换之后和上面的对象，除了 `type` 不是字符串，而是具体的组件类型，其它都和上面一样。
+
+（完）
