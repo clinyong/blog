@@ -1,5 +1,5 @@
 import * as React from "react";
-import styled from "styled-components";
+import styled from "../../cubi/node_modules/styled-components";
 
 const Container = styled.div`position: relative;`;
 const Content = styled.div`

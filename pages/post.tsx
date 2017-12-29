@@ -1,5 +1,5 @@
 import * as React from "react";
-import styled from "styled-components";
+import styled from "../../cubi/node_modules/styled-components";
 import showdown from "showdown";
 import Layout from "../components/Layout";
 
