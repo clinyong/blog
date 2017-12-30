@@ -126,14 +126,19 @@ const Content = styled.div`
 	}
 `;
 
-export default class Post extends React.PureComponent {
-	static async getInitialProps({ query }) {
-		const result = query.content;
-		const { title, date } = result.meta;
-		const content = converter.makeHtml(result.content);
-		return { title, date, content };
-	}
+interface Content {
+    meta: {
+        title: string;
+        date: string;
+    };
+    content: string;
+}
 
+interface PostProps {
+    content: Content;
+}
+
+export default class Post extends React.PureComponent<PostProps, any> {
 	componentDidMount() {
 		if (process.env.NODE_ENV === "production") {
 			lazyLoadDisqus();
@@ -141,7 +146,13 @@ export default class Post extends React.PureComponent {
 	}
 
 	render() {
-		const { title, content, date } = this.props;
+        let props = this.props;
+        if (typeof INIT_PROPS !== "undefined") {
+            props = INIT_PROPS;
+        }
+
+        const { title, date } = props.content.meta;
+        let content = converter.makeHtml(props.content.content);
 
 		return (
 			<Layout>

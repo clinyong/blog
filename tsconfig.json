@@ -10,7 +10,6 @@
         "removeComments": true,
         "experimentalDecorators": true,
         "noUnusedLocals": true,
-        "baseUrl": "./src",
         "lib": [
             "ES6",
             "DOM",
@@ -22,7 +21,8 @@
     },
     "include": [
         "./pages/**/*.ts",
-        "./pages/**/*.tsx"
+        "./pages/**/*.tsx",
+        "./types/**/*.d.ts"
     ],
     "exclude": [
         "node_modules",
