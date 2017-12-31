@@ -1,5 +1,5 @@
 import * as React from "react";
-import styled from "../../cubi/node_modules/styled-components";
+import styled from "../../../cubi/node_modules/styled-components";
 
 const Container = styled.div`position: relative;`;
 const Content = styled.div`
@@ -25,7 +25,7 @@ const Coding = styled.span`
 	}
 `;
 
-export default class Layout extends React.PureComponent {
+export default class Layout extends React.PureComponent<{}, {}> {
 	componentDidMount() {
 		function injectGA() {
 			(function(i, s, o, g, r, a, m) {

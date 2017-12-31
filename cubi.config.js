@@ -11,8 +11,8 @@ module.exports = validateConfig({
     name: "blog",
     title: "blog",
     entry: {
-        index: resolve("./pages/index"),
-        post: resolve("./pages/post")
+        index: resolve("./src/view/Index"),
+        post: resolve("./src/view/Post")
     },
     dllEntry: {
         vendors: ["react", "react-dom"]

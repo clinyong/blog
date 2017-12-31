@@ -1,6 +1,6 @@
 import * as React from "react";
-import styled from "../../cubi/node_modules/styled-components";
-import Layout from "../components/Layout";
+import styled from "../../../cubi/node_modules/styled-components";
+import Layout from "../component/Layout";
 
 const Container = styled.div`
     width: 100%;
@@ -86,7 +86,11 @@ const Article = styled.li`
     }
 `;
 
-export default class Index extends React.PureComponent {
+interface IndexProps {
+    articles: { link: string; title: string }[];
+}
+
+export default class Index extends React.PureComponent<IndexProps, {}> {
     static async getInitialProps({ query }) {
         return { articles: query.articles || [] };
     }
