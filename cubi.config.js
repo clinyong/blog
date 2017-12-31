@@ -40,7 +40,7 @@ module.exports = validateConfig({
                 page: "index",
                 query: {
                     articles: files.map(item => ({
-                        link: item.link,
+                        link: item.link + ".html",
                         title: item.title
                     }))
                 }
