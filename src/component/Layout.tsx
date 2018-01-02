@@ -1,7 +1,20 @@
 import * as React from "react";
-import styled from "../../../cubi/node_modules/styled-components";
+import styled, { injectGlobal } from "../../../cubi/node_modules/styled-components";
 
-const Container = styled.div`position: relative;`;
+injectGlobal`
+html {
+    position: relative;
+    background-color: #ECF0F1;
+    font-family: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft Yahei', 'WenQuanYi Micro Hei',sans-serif;
+}
+html, body {
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+}
+`;
+
+const Container = styled.div`position: relative; font`;
 const Content = styled.div`
 	@media screen and (min-width: 770px) {
 		padding: 40px 0 100px;
