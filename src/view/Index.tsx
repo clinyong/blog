@@ -1,5 +1,5 @@
 import * as React from "react";
-import styled from "../../../cubi/node_modules/styled-components";
+import styled from "styled-components";
 import Layout from "../component/Layout";
 
 const Container = styled.div`

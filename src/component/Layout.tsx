@@ -1,5 +1,5 @@
 import * as React from "react";
-import styled, { injectGlobal } from "../../../cubi/node_modules/styled-components";
+import styled, { injectGlobal } from "styled-components";
 
 injectGlobal`
 html {

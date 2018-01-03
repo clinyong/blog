@@ -7,10 +7,10 @@ init:
 	yarn
 
 build:
-	next build && next export -o dist && node ./bin/createSitemap.js
+	npm run build && node ./bin/createSitemap.js
 
 dev:
-	@node ./bin/server.js
+	npm start
 
 publish:build
 	cd dist && git add . && git commit -m 'auto update blog' && git checkout master && git push
