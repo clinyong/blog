@@ -91,12 +91,13 @@ interface IndexProps {
 }
 
 export default class Index extends React.PureComponent<IndexProps, {}> {
-    static async getInitialProps({ query }) {
-        return { articles: query.articles || [] };
-    }
-
     render() {
-        const { articles } = this.props;
+        let props = this.props;
+        if (typeof INIT_PROPS !== "undefined") {
+            props = INIT_PROPS;
+        }
+
+        const { articles } = props;
         return (
             <Layout>
                 <Container>
