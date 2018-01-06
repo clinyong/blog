@@ -10,7 +10,7 @@
     },
     "dependencies": {
         "chalk": "^1.1.3",
-        "cubi": "^0.1.0",
+        "cubi": "^0.1.2",
         "fs-extra": "^4.0.1",
         "react": "^16.2.0",
         "react-dom": "^16.2.0",
