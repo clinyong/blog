@@ -20,8 +20,8 @@
         "allowJs": true
     },
     "include": [
-        "./pages/**/*.ts",
-        "./pages/**/*.tsx",
+        "./src/**/*.ts",
+        "./src/**/*.tsx",
         "./types/**/*.d.ts"
     ],
     "exclude": [

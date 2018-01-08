@@ -1,3 +1,1 @@
-interface Window {
-    INIT_PROPS: any;
-}
+declare const INIT_PROPS: any;
