@@ -8,30 +8,42 @@ html {
     font-family: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft Yahei', 'WenQuanYi Micro Hei',sans-serif;
 }
 html, body {
+    height: 100%;
     min-height: 100%;
     margin: 0;
     padding: 0;
 }
+#app {
+    height: 100%;
+}
 `;
 
-const Container = styled.div`position: relative;`;
+const Container = styled.div`
+    position: relative;
+    height: 100%;
+`;
 const Content = styled.div`
     @media screen and (min-width: 770px) {
-        padding: 40px 0 100px;
+        padding: 0px 0 100px;
     }
 `;
 
 const Header = styled.ul`
     text-align: center;
-    margin-right: 30px;
+    margin-right: 50px;
     margin-bottom: 30px;
-    margin-top: 30px;
+    margin-top: 0px;
+    padding-top: 30px;
 
-    &>a {
+    & > a {
         color: #222;
         text-align: center;
         text-decoration: none;
         font-size: 18px;
+
+        &:hover {
+            border-bottom: 2px solid #222;
+        }
     }
 `;
 
@@ -96,7 +108,11 @@ export default class Layout extends React.PureComponent<{}, {}> {
                 <Content>{this.props.children}</Content>
                 <Footer>
                     <Coding>
-                        Hosted by{" "}
+                        Power by&nbsp;
+                        <a href="https://github.com/clinyong/cubi">Cubi</a>, &nbsp;
+                    </Coding>
+                    <Coding>
+                        Hosted by&nbsp;
                         <a href="https://pages.coding.me">Coding Pages</a>
                     </Coding>
                 </Footer>
