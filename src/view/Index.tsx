@@ -5,7 +5,7 @@ import Layout from "../component/Layout";
 const Container = styled.div`
     width: 100%;
     @media screen and (min-width: 770px) {
-        width: 768px;
+        width: 650px;
         margin: 0 auto;
     }
 `;
@@ -44,24 +44,6 @@ const List = styled.ul`
     }
 `;
 
-const BrandPC = styled.li`
-    background-color: #464d5c;
-    font-size: 24px;
-    padding: 15px;
-    padding-left: 20px;
-    @media screen and (max-width: 770px) {
-        display: none;
-    }
-`;
-
-const Shell = styled.span`
-    color: #bee178;
-    font-size: 22px;
-`;
-
-const Command = styled.span`
-    color: #61c4ca;
-`;
 const Article = styled.li`
     & > a {
         display: block;
@@ -109,11 +91,6 @@ export default class Index extends React.PureComponent<IndexProps, {}> {
 
                     <div>
                         <List>
-                            <BrandPC>
-                                <Shell>$ </Shell>
-                                <Command>ls</Command>
-                            </BrandPC>
-
                             {articles.map(item => (
                                 <Article key={item.link}>
                                     <a href={item.link}>{item.title}</a>

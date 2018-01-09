@@ -12,7 +12,8 @@ module.exports = validateConfig({
     title: "blog",
     entry: {
         index: resolve("./src/view/Index"),
-        post: resolve("./src/view/Post")
+        post: resolve("./src/view/Post"),
+        about: resolve("./src/view/About")
     },
     dllEntry: {
         vendors: ["react", "react-dom"]
@@ -36,7 +37,16 @@ module.exports = validateConfig({
         );
 
         return Object.assign({}, pages, {
-            "index": {
+            index: {
+                page: "index",
+                query: {
+                    articles: files.slice(0, 10).map(item => ({
+                        link: item.link + ".html",
+                        title: item.title
+                    }))
+                }
+            },
+            archive: {
                 page: "index",
                 query: {
                     articles: files.map(item => ({
@@ -44,6 +54,9 @@ module.exports = validateConfig({
                         title: item.title
                     }))
                 }
+            },
+            about: {
+                page: "about"
             }
         });
     }
