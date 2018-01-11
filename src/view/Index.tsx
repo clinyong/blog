@@ -11,8 +11,8 @@ const Container = styled.div`
 `;
 
 const Head = styled.div`
-    height: 150px;
-    line-height: 150px;
+    height: 120px;
+    line-height: 120px;
     position: relative;
     @media screen and (min-width: 770px) {
         display: none;

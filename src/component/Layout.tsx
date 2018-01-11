@@ -4,45 +4,51 @@ import styled, { injectGlobal } from "styled-components";
 injectGlobal`
 html {
     position: relative;
-    background-color: #ECF0F1;
+    background-color: #464d5c;
     font-family: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft Yahei', 'WenQuanYi Micro Hei',sans-serif;
 }
+
 html, body {
-    height: 100%;
     min-height: 100%;
     margin: 0;
     padding: 0;
 }
+
 #app {
-    height: 100%;
+    min-height: 100%;
 }
 `;
 
 const Container = styled.div`
     position: relative;
-    height: 100%;
+    min-height: 100%;
 `;
 const Content = styled.div`
+    padding-bottom: 60px;
     @media screen and (min-width: 770px) {
         padding: 0px 0 100px;
     }
 `;
 
 const Header = styled.ul`
-    text-align: center;
-    margin-right: 50px;
-    margin-bottom: 30px;
-    margin-top: 0px;
-    padding-top: 30px;
-
-    & > a {
-        color: #222;
+    display: none;
+    @media screen and (min-width: 770px) {
+        display: block;
         text-align: center;
-        text-decoration: none;
-        font-size: 18px;
+        margin-right: 50px;
+        margin-bottom: 30px;
+        margin-top: 0px;
+        padding-top: 30px;
 
-        &:hover {
-            border-bottom: 2px solid #222;
+        & > a {
+            color: #222;
+            text-align: center;
+            text-decoration: none;
+            font-size: 18px;
+
+            &:hover {
+                border-bottom: 2px solid #222;
+            }
         }
     }
 `;
@@ -60,7 +66,13 @@ const Coding = styled.span`
     color: #999;
 
     & > a {
-        color: #108ee9 !important;
+        color: #bee178 !important;
+        text-decoration: none;
+
+        @media screen and (min-width: 770px) {
+            color: #108ee9 !important;
+            text-decoration: underline;
+        }
     }
 `;
 
@@ -109,7 +121,8 @@ export default class Layout extends React.PureComponent<{}, {}> {
                 <Footer>
                     <Coding>
                         Power by&nbsp;
-                        <a href="https://github.com/clinyong/cubi">Cubi</a>, &nbsp;
+                        <a href="https://github.com/clinyong/cubi">Cubi</a>,
+                        &nbsp;
                     </Coding>
                     <Coding>
                         Hosted by&nbsp;
