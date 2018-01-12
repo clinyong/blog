@@ -31,6 +31,24 @@ const Tag = styled.span`
     color: #bee178;
 `;
 
+const NavBar = styled.button`
+    position: absolute;
+    right: 0px;
+    padding: 19px 19px;
+    top: 0px;
+    border-radius: 50%;
+    background-color: transparent;
+    border-color: transparent;
+`;
+
+const NavIcon = styled.span`
+    height: 2px;
+    width: 18px;
+    margin-bottom: 3px;
+    display: block;
+    background-color: #bee178;
+`;
+
 const List = styled.ul`
     padding: 0;
     margin: 0;
@@ -87,6 +105,12 @@ export default class Index extends React.PureComponent<IndexProps, {}> {
                         <BrandMobile>
                             <Tag>{"<Leodots />"}</Tag>
                         </BrandMobile>
+
+                        <NavBar>
+                            <NavIcon />
+                            <NavIcon />
+                            <NavIcon />
+                        </NavBar>
                     </Head>
 
                     <div>

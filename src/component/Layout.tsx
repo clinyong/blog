@@ -12,19 +12,19 @@ html {
 }
 
 html, body {
-    min-height: 100%;
+    min-height: 100vh;
     margin: 0;
     padding: 0;
 }
 
 #app {
-    min-height: 100%;
+    min-height: 100vh;
 }
 `;
 
 const Container = styled.div`
     position: relative;
-    min-height: 100%;
+    min-height: 100vh;
 `;
 const Content = styled.div`
     padding-bottom: 60px;
