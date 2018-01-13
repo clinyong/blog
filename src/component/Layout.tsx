@@ -5,6 +5,7 @@ injectGlobal`
 html {
     position: relative;
     background-color: #464d5c;
+    user-select: none;
     font-family: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft Yahei', 'WenQuanYi Micro Hei',sans-serif;
     @media screen and (min-width: 770px) {
         background-color: #ECF0F1;

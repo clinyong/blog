@@ -39,6 +39,7 @@ const NavBar = styled.button`
     border-radius: 50%;
     background-color: transparent;
     border-color: transparent;
+    transition: 0.5s background-color;
 `;
 
 const NavIcon = styled.span`
@@ -47,6 +48,20 @@ const NavIcon = styled.span`
     margin-bottom: 3px;
     display: block;
     background-color: #bee178;
+`;
+
+const NavMenu = styled.ul`
+    position: absolute;
+    right: 20px;
+    top: 42px;
+    width: 170px;
+    height: 170px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    box-shadow: rgba(0, 0, 0, 0.117647) 0 1px 6px,
+        rgba(0, 0, 0, 0.239216) 0 1px 4px;
+    transition: .2s;
 `;
 
 const List = styled.ul`
@@ -90,7 +105,29 @@ interface IndexProps {
     articles: { link: string; title: string }[];
 }
 
-export default class Index extends React.PureComponent<IndexProps, {}> {
+interface IndexState {
+    highlightMenu: boolean;
+    showMenu: boolean;
+}
+
+export default class Index extends React.PureComponent<IndexProps, IndexState> {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            highlightMenu: false,
+            showMenu: false
+        };
+
+        this.toggleMenu = this.toggleMenu.bind(this);
+    }
+
+    toggleMenu() {
+        this.setState({
+            showMenu: !this.state.showMenu
+        });
+    }
+
     render() {
         let props = this.props;
         if (typeof INIT_PROPS !== "undefined") {
@@ -98,6 +135,7 @@ export default class Index extends React.PureComponent<IndexProps, {}> {
         }
 
         const { articles } = props;
+        const { highlightMenu, showMenu } = this.state;
         return (
             <Layout>
                 <Container>
@@ -106,11 +144,28 @@ export default class Index extends React.PureComponent<IndexProps, {}> {
                             <Tag>{"<Leodots />"}</Tag>
                         </BrandMobile>
 
-                        <NavBar>
+                        <NavBar
+                            onClick={this.toggleMenu}
+                            onTouchStart={() =>
+                                this.setState({ highlightMenu: true })
+                            }
+                            onTouchEnd={() =>
+                                this.setState({ highlightMenu: false })
+                            }
+                            style={{
+                                backgroundColor: highlightMenu
+                                    ? "rgba(255, 255, 255, .5)"
+                                    : "transparent"
+                            }}
+                        >
                             <NavIcon />
                             <NavIcon />
                             <NavIcon />
                         </NavBar>
+
+                        <NavMenu
+                            style={showMenu ? null : { width: 0, height: 0 }}
+                        />
                     </Head>
 
                     <div>
