@@ -5,6 +5,7 @@ injectGlobal`
 html {
     position: relative;
     background-color: #464d5c;
+    user-select: none;
     font-family: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft Yahei', 'WenQuanYi Micro Hei',sans-serif;
     @media screen and (min-width: 770px) {
         background-color: #ECF0F1;
@@ -12,19 +13,19 @@ html {
 }
 
 html, body {
-    min-height: 100%;
+    min-height: 100vh;
     margin: 0;
     padding: 0;
 }
 
 #app {
-    min-height: 100%;
+    min-height: 100vh;
 }
 `;
 
 const Container = styled.div`
     position: relative;
-    min-height: 100%;
+    min-height: 100vh;
 `;
 const Content = styled.div`
     padding-bottom: 60px;
@@ -123,7 +124,7 @@ export default class Layout extends React.PureComponent<{}, {}> {
                 <Content>{this.props.children}</Content>
                 <Footer>
                     <Coding>
-                        Power by&nbsp;
+                        Powered by&nbsp;
                         <a href="https://github.com/clinyong/cubi">Cubi</a>,
                         &nbsp;
                     </Coding>

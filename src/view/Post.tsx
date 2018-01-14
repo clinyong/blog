@@ -44,16 +44,15 @@ function lazyLoadDisqus() {
 }
 
 const Container = styled.div`
-	width: 100%;
-	box-shadow: 0px 30px 60px 0px #d3dde2;
 	padding: 20px 15px 25px;
-	box-sizing: border-box;
 	background-color: #fff;
 	@media screen and (min-width: 770px) {
+        box-sizing: border-box;
         width: 768px;
         margin: 0 auto;
 		padding-left: 40px;
 		padding-right: 40px;
+        box-shadow: 0px 30px 60px 0px #d3dde2;
 	}
 `;
 
