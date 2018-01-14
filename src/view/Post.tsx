@@ -44,11 +44,10 @@ function lazyLoadDisqus() {
 }
 
 const Container = styled.div`
-	width: 100%;
 	padding: 20px 15px 25px;
-	box-sizing: border-box;
 	background-color: #fff;
 	@media screen and (min-width: 770px) {
+        box-sizing: border-box;
         width: 768px;
         margin: 0 auto;
 		padding-left: 40px;
