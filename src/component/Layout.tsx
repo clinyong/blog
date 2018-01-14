@@ -124,7 +124,7 @@ export default class Layout extends React.PureComponent<{}, {}> {
                 <Content>{this.props.children}</Content>
                 <Footer>
                     <Coding>
-                        Power by&nbsp;
+                        Powered by&nbsp;
                         <a href="https://github.com/clinyong/cubi">Cubi</a>,
                         &nbsp;
                     </Coding>
