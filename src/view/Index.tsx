@@ -11,8 +11,6 @@ const Container = styled.div`
 `;
 
 const Head = styled.div`
-    height: 120px;
-    line-height: 120px;
     position: relative;
     @media screen and (min-width: 770px) {
         display: none;
@@ -23,7 +21,7 @@ const BrandMobile = styled.div`
     text-align: center;
     background-color: #464d5c;
     color: #fff;
-    padding: 10px;
+    padding: 40px 10px 20px;
     font-size: 40px;
 `;
 
@@ -54,14 +52,25 @@ const NavMenu = styled.ul`
     position: absolute;
     right: 20px;
     top: 42px;
-    width: 170px;
-    height: 170px;
+    width: 150px;
+    height: 125px;
     background-color: #fff;
-    display: flex;
-    flex-direction: column;
     box-shadow: rgba(0, 0, 0, 0.117647) 0 1px 6px,
         rgba(0, 0, 0, 0.239216) 0 1px 4px;
-    transition: .2s;
+    transition: 0.2s;
+    overflow: hidden;
+    padding: 10px 0;
+
+    & > li {
+        list-style: none;
+
+        & > a {
+            text-decoration: none;
+            color: #777;
+            display: block;
+            padding: 10px 20px;
+        }
+    }
 `;
 
 const List = styled.ul`
@@ -106,7 +115,6 @@ interface IndexProps {
 }
 
 interface IndexState {
-    highlightMenu: boolean;
     showMenu: boolean;
 }
 
@@ -115,7 +123,6 @@ export default class Index extends React.PureComponent<IndexProps, IndexState> {
         super(props);
 
         this.state = {
-            highlightMenu: false,
             showMenu: false
         };
 
@@ -135,7 +142,7 @@ export default class Index extends React.PureComponent<IndexProps, IndexState> {
         }
 
         const { articles } = props;
-        const { highlightMenu, showMenu } = this.state;
+        const { showMenu } = this.state;
         return (
             <Layout>
                 <Container>
@@ -144,20 +151,7 @@ export default class Index extends React.PureComponent<IndexProps, IndexState> {
                             <Tag>{"<Leodots />"}</Tag>
                         </BrandMobile>
 
-                        <NavBar
-                            onClick={this.toggleMenu}
-                            onTouchStart={() =>
-                                this.setState({ highlightMenu: true })
-                            }
-                            onTouchEnd={() =>
-                                this.setState({ highlightMenu: false })
-                            }
-                            style={{
-                                backgroundColor: highlightMenu
-                                    ? "rgba(255, 255, 255, .5)"
-                                    : "transparent"
-                            }}
-                        >
+                        <NavBar onClick={this.toggleMenu}>
                             <NavIcon />
                             <NavIcon />
                             <NavIcon />
@@ -165,7 +159,17 @@ export default class Index extends React.PureComponent<IndexProps, IndexState> {
 
                         <NavMenu
                             style={showMenu ? null : { width: 0, height: 0 }}
-                        />
+                        >
+                            <li>
+                                <a href="/">首页</a>
+                            </li>
+                            <li>
+                                <a href="/archive.html">归档</a>
+                            </li>
+                            <li>
+                                <a href="/about.html">关于</a>
+                            </li>
+                        </NavMenu>
                     </Head>
 
                     <div>
