@@ -1,1 +1,1 @@
-A tool for generating my [blog](https://blog.leodots.me).
+Source code of my [blog](https://blog.leodots.me).
