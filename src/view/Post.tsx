@@ -152,13 +152,8 @@ export default class Post extends React.PureComponent<PostProps, any> {
 	}
 
 	render() {
-        let props = this.props;
-        if (typeof INIT_PROPS !== "undefined") {
-            props = INIT_PROPS;
-        }
-
-        const { title, date } = props.content.meta;
-        let content = converter.makeHtml(props.content.content);
+        const { title, date } = this.props.content.meta;
+        let content = converter.makeHtml(this.props.content.content);
 
 		return (
 			<Layout>

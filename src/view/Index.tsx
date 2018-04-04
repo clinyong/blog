@@ -136,12 +136,7 @@ export default class Index extends React.PureComponent<IndexProps, IndexState> {
     }
 
     render() {
-        let props = this.props;
-        if (typeof INIT_PROPS !== "undefined") {
-            props = INIT_PROPS;
-        }
-
-        const { articles } = props;
+        const { articles } = this.props;
         const { showMenu } = this.state;
         return (
             <Layout>
