@@ -4,10 +4,10 @@ const path = require("path");
 
 const name = process.argv[2];
 if (name === undefined) {
-	console.log(
-		chalk.red("Please input the file name. Usage: make post name=xxx")
-	);
-	return;
+    console.log(
+        chalk.red("Please input the file name. Usage: make post name=xxx")
+    );
+    return;
 }
 
 const postDir = path.resolve(__dirname, "../src/article");
