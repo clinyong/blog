@@ -16,7 +16,8 @@ module.exports = validateConfig({
         about: resolve("./src/view/About")
     },
     dllEntry: {
-        vendors: ["react", "react-dom"]
+        vendors: ["react", "react-dom"],
+        "__post": ["highlight.js", "highlight.js/styles/github.css"]
     },
     outputPath: resolve("./dist"),
     devPort: 8687,
