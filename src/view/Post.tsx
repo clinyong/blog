@@ -2,6 +2,8 @@ import * as React from "react";
 import styled from "styled-components";
 import showdown from "showdown";
 import Layout from "../component/Layout";
+import * as hljs from "highlight.js";
+import "highlight.js/styles/github.css";
 
 const converter = new showdown.Converter();
 
@@ -149,6 +151,8 @@ export default class Post extends React.PureComponent<PostProps, any> {
         if (process.env.NODE_ENV === "production") {
             lazyLoadDisqus();
         }
+
+        hljs.initHighlightingOnLoad();
     }
 
     render() {
