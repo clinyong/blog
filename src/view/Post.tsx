@@ -2,8 +2,20 @@ import * as React from "react";
 import styled from "styled-components";
 import showdown from "showdown";
 import Layout from "../component/Layout";
-import * as hljs from "highlight.js";
+import * as hljs from "highlight.js/lib/highlight";
+
 import "highlight.js/styles/github.css";
+
+hljs.registerLanguage(
+    "javascript",
+    require("highlight.js/lib/languages/javascript")
+);
+hljs.registerLanguage(
+    "typescript",
+    require("highlight.js/lib/languages/typescript")
+);
+hljs.registerLanguage("css", require("highlight.js/lib/languages/css"));
+hljs.registerLanguage("xml", require("highlight.js/lib/languages/xml"));
 
 const converter = new showdown.Converter();
 

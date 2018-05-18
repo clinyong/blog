@@ -17,7 +17,14 @@ module.exports = validateConfig({
     },
     dllEntry: {
         vendors: ["react", "react-dom"],
-        "__post": ["highlight.js", "highlight.js/styles/github.css"]
+        __post: [
+            "highlight.js/styles/github.css",
+            "highlight.js/lib/highlight",
+            "highlight.js/lib/languages/javascript",
+            "highlight.js/lib/languages/typescript",
+            "highlight.js/lib/languages/css",
+            "highlight.js/lib/languages/xml"
+        ]
     },
     outputPath: resolve("./dist"),
     devPort: 8687,
