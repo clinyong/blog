@@ -169,7 +169,11 @@ export default class Post extends React.PureComponent<PostProps, any> {
 
     render() {
         const { title, date } = this.props.content.meta;
-        let content = converter.makeHtml(this.props.content.content);
+        let content = converter.makeHtml(
+            this.props.content.content
+                .replace(/&lt;/g, "<")
+                .replace(/&gt;/g, ">")
+        );
 
         return (
             <Layout>
