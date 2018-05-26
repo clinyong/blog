@@ -74,7 +74,7 @@ const Title = styled.div`
     margin-top: 0;
     margin-bottom: 30px;
     text-align: center;
-    font-size: 20px;
+    font-size: 24px;
     @media screen and (min-width: 770px) {
         font-size: 30px;
     }

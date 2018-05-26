@@ -1,5 +1,7 @@
 import * as React from "react";
 import styled, { injectGlobal } from "styled-components";
+import Head from "./Head";
+import Footer from "./Footer";
 
 injectGlobal`
 html {
@@ -30,52 +32,6 @@ const Content = styled.div`
     padding-bottom: 60px;
     @media screen and (min-width: 770px) {
         padding: 0px 0 100px;
-    }
-`;
-
-const Header = styled.ul`
-    display: none;
-    @media screen and (min-width: 770px) {
-        display: block;
-        text-align: center;
-        margin-right: 50px;
-        margin-bottom: 30px;
-        margin-top: 0px;
-        padding-top: 30px;
-
-        & > a {
-            color: #222;
-            text-align: center;
-            text-decoration: none;
-            font-size: 18px;
-
-            &:hover {
-                border-bottom: 2px solid #222;
-            }
-        }
-    }
-`;
-
-const Footer = styled.div`
-    position: absolute;
-    bottom: 20px;
-    left: 0;
-    right: 0;
-    text-align: center;
-    font-size: 12px;
-`;
-
-const Coding = styled.span`
-    color: #999;
-
-    & > a {
-        color: #bee178 !important;
-        text-decoration: none;
-
-        @media screen and (min-width: 770px) {
-            color: #108ee9 !important;
-            text-decoration: underline;
-        }
     }
 `;
 
@@ -113,25 +69,9 @@ export default class Layout extends React.PureComponent<{}, {}> {
     render() {
         return (
             <Container>
-                <Header>
-                    <a href="/">首页</a>
-                    <a href="/archive.html" style={{ margin: "0 50px" }}>
-                        归档
-                    </a>
-                    <a href="/about.html">关于</a>
-                </Header>
+                <Head />
                 <Content>{this.props.children}</Content>
-                <Footer>
-                    <Coding>
-                        Powered by&nbsp;
-                        <a href="https://github.com/clinyong/cubi">Cubi</a>,
-                        &nbsp;
-                    </Coding>
-                    <Coding>
-                        Hosted by&nbsp;
-                        <a href="https://pages.coding.me">Coding Pages</a>
-                    </Coding>
-                </Footer>
+                <Footer />
             </Container>
         );
     }
