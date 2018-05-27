@@ -13,10 +13,11 @@ module.exports = validateConfig({
     entry: {
         index: resolve("./src/view/Index"),
         post: resolve("./src/view/Post"),
-        about: resolve("./src/view/About")
+        about: resolve("./src/view/About"),
+        archive: resolve("./src/view/Archive")
     },
     dllEntry: {
-        vendors: ["react", "react-dom"],
+        vendors: ["react", "react-dom", "lodash/debounce"],
         __post: [
             "highlight.js/styles/github.css",
             "highlight.js/lib/highlight",
@@ -55,7 +56,7 @@ module.exports = validateConfig({
                 }
             },
             archive: {
-                page: "index",
+                page: "archive",
                 query: {
                     articles: files.map(item => ({
                         link: item.link + ".html",
