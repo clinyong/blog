@@ -2,26 +2,32 @@ import * as React from "react";
 import styled from "styled-components";
 
 const Container = styled.ul`
-    display: none;
-    @media screen and (min-width: 770px) {
-        display: block;
-        text-align: center;
-        margin-right: 50px;
-        margin-bottom: 30px;
-        margin-top: 0px;
-        padding-top: 30px;
+    display: block;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    padding-top: 30px;
+    list-style: none;
+    height: 55px;
 
-        & > a {
-            color: #222;
-            text-align: center;
-            text-decoration: none;
-            font-size: 18px;
-            margin: 0 25px;
+    @media screen and (max-width: 770px) {
+        display: none;
+    }
+`;
 
-            &:hover {
-                border-bottom: 2px solid #222;
-            }
-        }
+const ListItem: any = styled.li`
+    text-align: center;
+    font-size: 18px;
+    margin: 0 25px;
+    display: inline-block;
+
+    &:hover {
+        border-bottom: 2px solid #222;
+    }
+
+    & > a {
+        text-decoration: none;
+        color: #222;
     }
 `;
 
@@ -39,9 +45,9 @@ export default class PCHead extends React.PureComponent<MenuProps, {}> {
         return (
             <Container>
                 {this.props.list.map(item => (
-                    <a href={item.link} key={item.title}>
-                        {item.title}
-                    </a>
+                    <ListItem key={item.title}>
+                        <a href={item.link}>{item.title}</a>
+                    </ListItem>
                 ))}
             </Container>
         );
