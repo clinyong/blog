@@ -56,10 +56,11 @@ interface ListProps {
     showSearch?: boolean;
 }
 
-export default class List extends React.PureComponent<
-    ListProps,
-    { list: Article[] }
-> {
+interface ListState {
+    list: Article[];
+}
+
+export default class List extends React.PureComponent<ListProps, ListState> {
     constructor(props) {
         super(props);
 
@@ -68,6 +69,12 @@ export default class List extends React.PureComponent<
         };
 
         this.onSearch = debounce(this.onSearch.bind(this), 100);
+    }
+
+    static getDerivedStateFromProps(props: ListProps) {
+        return {
+            list: props.list
+        };
     }
 
     onSearch(val: string) {
@@ -80,18 +87,6 @@ export default class List extends React.PureComponent<
                           .includes(val.toLocaleLowerCase())
                   )
                 : list
-        });
-    }
-
-    componentWillReceiveProps(nextProps: ListProps) {
-        this.setState({
-            list: nextProps.list
-        });
-    }
-
-    componentDidMount() {
-        this.setState({
-            list: this.props.list
         });
     }
 
