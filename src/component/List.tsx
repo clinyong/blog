@@ -58,6 +58,7 @@ interface ListProps {
 
 interface ListState {
     list: Article[];
+    loadFromProps: boolean;
 }
 
 export default class List extends React.PureComponent<ListProps, ListState> {
@@ -65,20 +66,30 @@ export default class List extends React.PureComponent<ListProps, ListState> {
         super(props);
 
         this.state = {
-            list: []
+            list: [],
+            loadFromProps: false
         };
 
         this.onSearch = debounce(this.onSearch.bind(this), 100);
     }
 
-    static getDerivedStateFromProps(props: ListProps) {
-        return {
-            list: props.list
-        };
+    static getDerivedStateFromProps(
+        props: ListProps,
+        state: ListState
+    ): ListState | null {
+        if (!state.loadFromProps) {
+            return {
+                list: props.list,
+                loadFromProps: true
+            };
+        }
+
+        return null;
     }
 
     onSearch(val: string) {
         const { list } = this.props;
+
         this.setState({
             list: val
                 ? list.filter(item =>
