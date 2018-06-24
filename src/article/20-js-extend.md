@@ -166,4 +166,4 @@ var Cat = /** @class */ (function (_super) {
 }(Animal));
 ```
 
-这里一个比较有趣的是，通过 `({ __proto__: [] } instanceof Array` 去判断浏览器是不是支持 `__proto__`
+这里一个比较有趣的是，通过 `({ __proto__: [] } instanceof Array` 去判断浏览器是不是支持 `__proto__`。
