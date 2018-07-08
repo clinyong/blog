@@ -10,6 +10,6 @@ if (name === undefined) {
     return;
 }
 
-const postDir = path.resolve(__dirname, "../src/article");
+const postDir = path.resolve(__dirname, "../src/content/article");
 const fullName = newArticle(postDir, name);
 console.log(chalk.green(`Create ${fullName} successfully.`));
