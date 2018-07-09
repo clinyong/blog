@@ -1,6 +1,6 @@
 const path = require("path");
 const { validateConfig } = require("cubi");
-const readArticles = require("./lib/readArticles");
+const { readArticles, readAbout } = require("./lib/readContent");
 
 function resolve(p) {
     return path.resolve(__dirname, p);
@@ -33,8 +33,8 @@ module.exports = validateConfig({
         port: 8687
     },
     async exportPathMap() {
-        const files = await readArticles();
-        const pages = files.reduce(
+        const articles = await readArticles();
+        const pages = articles.reduce(
             (pages, file) =>
                 Object.assign({}, pages, {
                     [file.link]: {
@@ -45,11 +45,13 @@ module.exports = validateConfig({
             {}
         );
 
+        const aboutContent = await readAbout();
+
         return Object.assign({}, pages, {
             index: {
                 page: "index",
                 query: {
-                    articles: files.slice(0, 10).map(item => ({
+                    articles: articles.slice(0, 10).map(item => ({
                         link: item.link + ".html",
                         title: item.title
                     }))
@@ -58,14 +60,17 @@ module.exports = validateConfig({
             archive: {
                 page: "archive",
                 query: {
-                    articles: files.map(item => ({
+                    articles: articles.map(item => ({
                         link: item.link + ".html",
                         title: item.title
                     }))
                 }
             },
             about: {
-                page: "about"
+                page: "about",
+                query: {
+                    content: aboutContent
+                }
             }
         });
     }
