@@ -33,20 +33,4 @@ console.log(typeof Object) // function
 console.log(o.__proto__ === Object.prototype) // true
 ```
 
-上面创建实例的语句，等价于 `const o = new Object()`。来看下 `new` 具体做了什么事情，根据[MDN 文档](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new) 和方老师的[这篇文章](https://zhuanlan.zhihu.com/p/23987456)。我们可以用下面的代码来演示下整个 `new` 的过程。
-
-```js
-function createObject() {
-    const obj = Object.create(null);
-    obj.__proto__ = Object.prototype;
-    return obj;
-}
-
-const o = createObject();
-```
-
-实际上，执行 `new` 就是调用了 `Object.prototype.constructor` 的方法，而这个方法做的事情就是类似上面的 `createObject`。
-
-从上面整个 `new` 的过程，我们也可以看出 `__proto__` 和 `prototype` 的关系。
-
-完。
+（完）
