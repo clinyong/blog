@@ -15,7 +15,9 @@ date: 2018.08.01
 
 > The 301 (Moved Permanently) status code indicates that the target resource has been assigned a new permanent URI and any future references to this resource ought to use one of the enclosed URIs.
 
-301 表示请求的资源已经永久换了地址，下次就不要再用这个地址了，而用返回头部的新地址。对于我们普通用户来说，我们并不关心这些状态码，比如当我们在用浏览器访问一个页面的时候，也不会因为是返回 301，就在下次访问的时候用新的地址。实际上，浏览器已经帮我们做了这个事情。写个简单的例子测试一下。
+301 表示请求的资源已经永久换了地址，下次就不要再用这个地址了，而用返回头部的新地址。
+
+对于我们普通用户来说，我们并不关心这些状态码，比如当我们在用浏览器访问一个页面的时候，也不会因为是返回 301，就在下次访问的时候用新的地址。实际上，浏览器已经帮我们做了这个事情。写个简单的例子测试一下。
 
 ```js
 const express = require("express");
