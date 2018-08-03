@@ -11,9 +11,13 @@ function walkDir(root) {
         .then(item => item.filter(item => !item.startsWith(".")));
 }
 
+function getPathID(filePath) {
+    return Number(filePath.split("-")[0]);
+}
+
 async function createSitemap() {
     let urlList = await walkDir(postPath);
-    urlList = urlList.map(url => ({
+    urlList = urlList.sort((a, b) => getPathID(a) - getPathID(b)).map(url => ({
         url: "/post/" + url
     }));
     const sitemap = sm.createSitemap({
