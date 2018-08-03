@@ -11,7 +11,6 @@ body {
 }
 
 body {
-  margin: 0 10px;
   font-family: Times New Roman, Heiti SC, sans-serif;
 }
 
@@ -53,11 +52,21 @@ p:last-child {
 `;
 
 const Container = styled.div`
+    background-color: #fff;
+`;
+
+const Content = styled.div`
     width: 800px;
     margin: 0 auto;
     background-color: #fff;
     padding: 20px 40px;
     box-sizing: border-box;
+
+    @media screen and (max-width: 770px) {
+        width: auto;
+        padding: 10px 20px;
+        font-size: 14px;
+    }
 `;
 
 interface ResumeProps {
@@ -67,7 +76,10 @@ interface ResumeProps {
 export default class Resume extends React.PureComponent<ResumeProps, {}> {
     render() {
         let content = converter.makeHtml(this.props.content);
-
-        return <Container dangerouslySetInnerHTML={{ __html: content }} />;
+        return (
+            <Container>
+                <Content dangerouslySetInnerHTML={{ __html: content }} />;
+            </Container>
+        );
     }
 }
