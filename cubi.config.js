@@ -1,6 +1,6 @@
 const path = require("path");
 const { validateConfig } = require("cubi");
-const { readArticles, readAbout } = require("./lib/readContent");
+const { readArticles, readAbout, readResume } = require("./lib/readContent");
 
 function resolve(p) {
     return path.resolve(__dirname, p);
@@ -14,6 +14,7 @@ module.exports = validateConfig({
         index: resolve("./src/view/Index"),
         post: resolve("./src/view/Post"),
         about: resolve("./src/view/About"),
+        resume: resolve("./src/view/Resume"),
         archive: resolve("./src/view/Archive")
     },
     dllEntry: {
@@ -46,6 +47,7 @@ module.exports = validateConfig({
         );
 
         const aboutContent = await readAbout();
+        const resumeContent = await readResume();
 
         return Object.assign({}, pages, {
             index: {
@@ -70,6 +72,12 @@ module.exports = validateConfig({
                 page: "about",
                 query: {
                     content: aboutContent
+                }
+            },
+            resume: {
+                page: "resume",
+                query: {
+                    content: resumeContent
                 }
             }
         });
