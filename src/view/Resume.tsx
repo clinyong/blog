@@ -78,7 +78,7 @@ export default class Resume extends React.PureComponent<ResumeProps, {}> {
         let content = converter.makeHtml(this.props.content);
         return (
             <Container>
-                <Content dangerouslySetInnerHTML={{ __html: content }} />;
+                <Content dangerouslySetInnerHTML={{ __html: content }} />
             </Container>
         );
     }
