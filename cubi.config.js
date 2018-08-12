@@ -28,7 +28,7 @@ module.exports = validateConfig({
             "highlight.js/lib/languages/xml"
         ]
     },
-    outputPath: resolve("./dist"),
+    outputPath: resolve("../blog-deploy"),
     devPort: 8687,
     devServer: {
         port: 8687
