@@ -32,6 +32,7 @@ const Content = styled.div`
     padding-bottom: 60px;
     @media screen and (min-width: 770px) {
         padding: 0px 0 100px;
+        margin-left: calc(100vw - 100%);
     }
 `;
 
