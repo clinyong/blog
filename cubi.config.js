@@ -1,6 +1,7 @@
 const path = require("path");
 const { validateConfig } = require("cubi");
 const { readArticles, readAbout, readResume } = require("./lib/readContent");
+const { DIST_PATH } = require("./config");
 
 function resolve(p) {
     return path.resolve(__dirname, p);
@@ -28,7 +29,7 @@ module.exports = validateConfig({
             "highlight.js/lib/languages/xml"
         ]
     },
-    outputPath: resolve("../blog-deploy"),
+    outputPath: DIST_PATH,
     devPort: 8687,
     devServer: {
         port: 8687

@@ -1,9 +1,10 @@
 const sm = require("sitemap");
 const fs = require("fs-extra");
 const path = require("path");
+const { DIST_PATH } = require("../config");
 
-const distPath = path.resolve(__dirname, "../dist");
-const postPath = path.join(__dirname, "../dist/post");
+const postPath = path.join(DIST_PATH, "post");
+const sitemapPath = path.join(DIST_PATH, "sitemap.xml");
 
 function walkDir(root) {
     return fs
@@ -24,7 +25,7 @@ async function createSitemap() {
         hostname: "https://blog.leodots.me/",
         urls: [{ url: "/" }, ...urlList]
     });
-    fs.writeFileSync(`${distPath}/sitemap.xml`, sitemap.toString());
+    fs.writeFileSync(sitemapPath, sitemap.toString());
 }
 
 createSitemap();

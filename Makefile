@@ -11,7 +11,7 @@ dev:
 	npm start
 
 publish:build
-	cd ../blog-deploy && git add . && git commit -m 'auto update blog' && git checkout master && git push
+	cp -r dist/* ../blog-deploy && cd ../blog-deploy && git add . && git commit -m 'auto update blog' && git checkout master && git push
 	git push
 
 post:
