@@ -9,6 +9,7 @@ const Container = styled.ul`
     padding-top: 30px;
     list-style: none;
     height: 55px;
+    margin-left: calc(100vw - 100%); /* 避免滚动条晃动 */
 
     @media screen and (max-width: 770px) {
         display: none;
