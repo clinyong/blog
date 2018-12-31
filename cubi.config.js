@@ -11,6 +11,7 @@ module.exports = validateConfig({
     rootPath: resolve("./src"),
     name: "blog",
     title: "blog",
+    htmlTemplate: path.resolve(__dirname, "./templates/index.html"),
     entry: {
         index: resolve("./src/view/Index"),
         post: resolve("./src/view/Post"),
@@ -41,6 +42,7 @@ module.exports = validateConfig({
                 Object.assign({}, pages, {
                     [file.link]: {
                         page: "post",
+                        title: file.title,
                         query: { content: file.result }
                     }
                 }),
@@ -53,6 +55,7 @@ module.exports = validateConfig({
         return Object.assign({}, pages, {
             index: {
                 page: "index",
+                title: "",
                 query: {
                     articles: articles.slice(0, 10).map(item => ({
                         link: item.link + ".html",
@@ -62,6 +65,7 @@ module.exports = validateConfig({
             },
             archive: {
                 page: "archive",
+                title: "归档",
                 query: {
                     articles: articles.map(item => ({
                         link: item.link + ".html",
@@ -71,6 +75,7 @@ module.exports = validateConfig({
             },
             about: {
                 page: "about",
+                title: "关于",
                 query: {
                     content: aboutContent
                 }

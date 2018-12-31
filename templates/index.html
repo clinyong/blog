@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <% if (title) { %>
+      <title>
+        <%= title %> | Leodots
+      </title>
+    <% } else { %>
+      <title>
+        Leodots
+      </title>
+    <% } %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <% cssFiles.forEach(function(src) { %>
+      <link rel="stylesheet" href="/<%= src %>">
+    <% }) %>
+    <%- initStyles %>
+</head>
+
+<body>
+    <div id="app"><%- initContent %></div>
+    <% if (isProd) { %>
+      <script>
+          if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function () {
+              navigator.serviceWorker.register('/sw.js');
+            });
+          }
+      </script>
+      <% } %>
+    <script>
+		<%- manifestContent %>
+    </script>
+    <script>
+		var INIT_PROPS = <%- initProps %>;
+    </script>
+    <% scripts.forEach(function(src) { %>
+    <script src=/<%= src %>></script>
+    <% }) %>
+</body>
+
+</html>
