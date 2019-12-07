@@ -1,3 +1,6 @@
+.DS_Store
 .next
 .dll-link-plugin
 dist/
+node_modules
+yarn-error.log
